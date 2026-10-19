@@ -1,0 +1,201 @@
+Starting project at C:\Users\USER\Documents\rozan\wavify\app
+Starting Metro Bundler
+
+Waiting on http://localhost:8081
+
+Logs for your project will appear below.
+Android Bundled 909ms index.js (706 modules)
+Android Bundled 105ms index.js (1 module)
+Android Bundled 31ms index.js (1 module)
+ ERROR  [ReferenceError: Property 'Ionicons' doesn't exist]
+ ERROR  [ReferenceError: Property 'Shade' doesn't exist]
+ ERROR  [ReferenceError: Property 'Pressable' doesn't exist]
+ ERROR  [ReferenceError: Property 'Pressable' doesn't exist]
+Android Bundled 65ms index.js (1 module)
+Android Bundled 320ms index.js (1 module)
+Android Bundled 592ms index.js (1 module)
+Android Bundled 396ms index.js (1 module)
+Android Bundled 22ms index.js (1 module)
+Android Bundled 83ms index.js (1 module)
+Android Bundled 61ms index.js (1 module)
+Android Bundled 77ms index.js (1 module)
+Android Bundled 56ms index.js (1 module)
+Android Bundled 171ms index.js (1 module)
+ ERROR  SyntaxError: C:\Users\USER\Documents\rozan\wavify\app\App.js: Expected corresponding JSX closing tag for <View>. (94:6)
+
+  92 |           );
+  93 |         })}
+> 94 |       </BlurView>
+     |       ^
+  95 |
+  96 |       {full && (
+  97 |         <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, elevation: 100, backgroundColor: t.bg, paddingTop: insets.top + 4 }}>
+    at constructor (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:369:19)
+    at FlowParserMixin.raise (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:6622:19)
+    at FlowParserMixin.jsxParseElementAt (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4745:16)
+    at FlowParserMixin.jsxParseElementAt (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4716:32)
+    at FlowParserMixin.jsxParseElement (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4767:17)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4777:19)
+    at FlowParserMixin.parseExprSubscripts (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11107:23)
+    at FlowParserMixin.parseUpdate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11092:21)
+    at FlowParserMixin.parseMaybeUnary (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11072:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10925:61)
+    at FlowParserMixin.parseExprOps (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10930:23)
+    at FlowParserMixin.parseMaybeConditional (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10907:23)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10857:21)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3516:39
+    at FlowParserMixin.tryParse (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:6930:20)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3516:18)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10826:39
+    at FlowParserMixin.allowInAnd (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12460:12)
+    at FlowParserMixin.parseMaybeAssignAllowIn (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10826:17)
+    at FlowParserMixin.parseMaybeAssignAllowInOrVoidPattern (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12527:17)
+    at FlowParserMixin.parseParenAndDistinguishExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11706:28)
+    at FlowParserMixin.parseParenAndDistinguishExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3609:18)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11362:23)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4782:20)
+    at FlowParserMixin.parseExprSubscripts (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11107:23)
+    at FlowParserMixin.parseUpdate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11092:21)
+    at FlowParserMixin.parseMaybeUnary (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11072:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10925:61)
+    at FlowParserMixin.parseExprOps (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10930:23)
+    at FlowParserMixin.parseMaybeConditional (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10907:23)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10857:21)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3567:18)
+    at FlowParserMixin.parseExpressionBase (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10810:23)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10806:39
+    at FlowParserMixin.allowInAnd (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12455:16)
+    at FlowParserMixin.parseExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10806:17)
+    at FlowParserMixin.parseReturnStatement (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13176:28)
+    at FlowParserMixin.parseStatementContent (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12832:21)
+    at FlowParserMixin.parseStatementLike (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12801:17)
+    at FlowParserMixin.parseStatementLike (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2934:24)
+    at FlowParserMixin.parseStatementListItem (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12781:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13350:61)
+    at FlowParserMixin.parseBlockBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13343:10)
+    at FlowParserMixin.parseBlock (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13331:10)
+    at FlowParserMixin.parseFunctionBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12134:24)
+    at FlowParserMixin.parseFunctionBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2911:11)
+    at FlowParserMixin.parseFunctionBodyAndFinish (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12120:10)
+    at FlowParserMixin.parseFunctionBodyAndFinish (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2919:18)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13479:12
+    at FlowParserMixin.withSmartMixTopicForbiddingContext (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12437:14)
+ ERROR  [ReferenceError: Property 'BlurView' doesn't exist]
+ ERROR  SyntaxError: C:\Users\USER\Documents\rozan\wavify\app\App.js: Expected corresponding JSX closing tag for <View>. (94:6)
+
+  92 |           );
+  93 |         })}
+> 94 |       </BlurView>
+     |       ^
+  95 |
+  96 |       {full && (
+  97 |         <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, elevation: 100, backgroundColor: t.bg, paddingTop: insets.top + 4 }}>
+    at constructor (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:369:19)
+    at FlowParserMixin.raise (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:6622:19)
+    at FlowParserMixin.jsxParseElementAt (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4745:16)
+    at FlowParserMixin.jsxParseElementAt (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4716:32)
+    at FlowParserMixin.jsxParseElement (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4767:17)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4777:19)
+    at FlowParserMixin.parseExprSubscripts (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11107:23)
+    at FlowParserMixin.parseUpdate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11092:21)
+    at FlowParserMixin.parseMaybeUnary (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11072:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10925:61)
+    at FlowParserMixin.parseExprOps (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10930:23)
+    at FlowParserMixin.parseMaybeConditional (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10907:23)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10857:21)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3516:39
+    at FlowParserMixin.tryParse (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:6930:20)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3516:18)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10826:39
+    at FlowParserMixin.allowInAnd (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12460:12)
+    at FlowParserMixin.parseMaybeAssignAllowIn (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10826:17)
+    at FlowParserMixin.parseMaybeAssignAllowInOrVoidPattern (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12527:17)
+    at FlowParserMixin.parseParenAndDistinguishExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11706:28)
+    at FlowParserMixin.parseParenAndDistinguishExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3609:18)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11362:23)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4782:20)
+    at FlowParserMixin.parseExprSubscripts (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11107:23)
+    at FlowParserMixin.parseUpdate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11092:21)
+    at FlowParserMixin.parseMaybeUnary (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11072:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10925:61)
+    at FlowParserMixin.parseExprOps (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10930:23)
+    at FlowParserMixin.parseMaybeConditional (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10907:23)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10857:21)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3567:18)
+    at FlowParserMixin.parseExpressionBase (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10810:23)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10806:39
+    at FlowParserMixin.allowInAnd (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12455:16)
+    at FlowParserMixin.parseExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10806:17)
+    at FlowParserMixin.parseReturnStatement (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13176:28)
+    at FlowParserMixin.parseStatementContent (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12832:21)
+    at FlowParserMixin.parseStatementLike (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12801:17)
+    at FlowParserMixin.parseStatementLike (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2934:24)
+    at FlowParserMixin.parseStatementListItem (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12781:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13350:61)
+    at FlowParserMixin.parseBlockBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13343:10)
+    at FlowParserMixin.parseBlock (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13331:10)
+    at FlowParserMixin.parseFunctionBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12134:24)
+    at FlowParserMixin.parseFunctionBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2911:11)
+    at FlowParserMixin.parseFunctionBodyAndFinish (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12120:10)
+    at FlowParserMixin.parseFunctionBodyAndFinish (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2919:18)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13479:12
+    at FlowParserMixin.withSmartMixTopicForbiddingContext (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12437:14)
+ ERROR  SyntaxError: C:\Users\USER\Documents\rozan\wavify\app\App.js: Expected corresponding JSX closing tag for <View>. (94:6)
+
+  92 |           );
+  93 |         })}
+> 94 |       </BlurView>
+     |       ^
+  95 |
+  96 |       {full && (
+  97 |         <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, elevation: 100, backgroundColor: t.bg, paddingTop: insets.top + 4 }}>
+    at constructor (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:369:19)
+    at FlowParserMixin.raise (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:6622:19)
+    at FlowParserMixin.jsxParseElementAt (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4745:16)
+    at FlowParserMixin.jsxParseElementAt (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4716:32)
+    at FlowParserMixin.jsxParseElement (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4767:17)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4777:19)
+    at FlowParserMixin.parseExprSubscripts (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11107:23)
+    at FlowParserMixin.parseUpdate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11092:21)
+    at FlowParserMixin.parseMaybeUnary (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11072:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10925:61)
+    at FlowParserMixin.parseExprOps (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10930:23)
+    at FlowParserMixin.parseMaybeConditional (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10907:23)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10857:21)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3516:39
+    at FlowParserMixin.tryParse (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:6930:20)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3516:18)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10826:39
+    at FlowParserMixin.allowInAnd (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12460:12)
+    at FlowParserMixin.parseMaybeAssignAllowIn (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10826:17)
+    at FlowParserMixin.parseMaybeAssignAllowInOrVoidPattern (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12527:17)
+    at FlowParserMixin.parseParenAndDistinguishExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11706:28)
+    at FlowParserMixin.parseParenAndDistinguishExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3609:18)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11362:23)
+    at FlowParserMixin.parseExprAtom (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:4782:20)
+    at FlowParserMixin.parseExprSubscripts (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11107:23)
+    at FlowParserMixin.parseUpdate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11092:21)
+    at FlowParserMixin.parseMaybeUnary (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:11072:23)
+    at FlowParserMixin.parseMaybeUnaryOrPrivate (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10925:61)
+    at FlowParserMixin.parseExprOps (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10930:23)
+    at FlowParserMixin.parseMaybeConditional (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10907:23)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10857:21)
+    at FlowParserMixin.parseMaybeAssign (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:3567:18)
+    at FlowParserMixin.parseExpressionBase (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10810:23)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10806:39
+    at FlowParserMixin.allowInAnd (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12455:16)
+    at FlowParserMixin.parseExpression (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:10806:17)
+    at FlowParserMixin.parseReturnStatement (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13176:28)
+    at FlowParserMixin.parseStatementContent (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12832:21)
+    at FlowParserMixin.parseStatementLike (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12801:17)
+    at FlowParserMixin.parseStatementLike (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2934:24)
+    at FlowParserMixin.parseStatementListItem (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12781:17)
+    at FlowParserMixin.parseBlockOrModuleBlockBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13350:61)
+    at FlowParserMixin.parseBlockBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13343:10)
+    at FlowParserMixin.parseBlock (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13331:10)
+    at FlowParserMixin.parseFunctionBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12134:24)
+    at FlowParserMixin.parseFunctionBody (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2911:11)
+    at FlowParserMixin.parseFunctionBodyAndFinish (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12120:10)
+    at FlowParserMixin.parseFunctionBodyAndFinish (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:2919:18)
+    at C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:13479:12
+    at FlowParserMixin.withSmartMixTopicForbiddingContext (C:\Users\USER\Documents\rozan\wavify\app\node_modules\@babel\parser\lib\index.js:12437:14)
