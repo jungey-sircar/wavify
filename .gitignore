@@ -1,0 +1,30 @@
+wavify-scraper.exe
+*.exe
+
+# build artifacts and binaries
+*.apk
+*.aab
+dist/
+android/
+app/android/
+
+# server binaries
+backend/wavify-server
+backend/wavify-server-linux
+
+# logs
+*.log
+metro.log
+gradle.log
+
+# env files (commit .env.example instead)
+.env
+.env.*
+!.env.example
+
+# local notes
+readme-for-github.txt
+
+# expo generated
+.expo/
+node_modules/
