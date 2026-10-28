@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, Pressable, RefreshControl, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "../Icon";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api, coverOf, artistsOf } from "../api";
 import { useStore } from "../store";

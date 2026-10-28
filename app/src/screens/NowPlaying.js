@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { View, Text, Pressable, ScrollView, StyleSheet, Dimensions, Animated, PanResponder } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "../Icon";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useStore } from "../store";
 import { usePlayer } from "../player";

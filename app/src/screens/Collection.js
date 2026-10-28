@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+﻿import React, { useEffect, useState, useRef, useCallback } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "../Icon";
 import { api, coverOf, artistsOf } from "../api";
 import { useStore } from "../store";
 import { Cover, SongRow, Shelf, IconBtn, SkeletonList } from "../components";
@@ -159,7 +159,7 @@ export function Collection({ initialQuery, title, nav }) {
             </Shelf>
           )}
           {songs.length + albums.length + artists.length + playlists.length === 0 && (
-            <Text style={{ color: t.muted, textAlign: "center", marginTop: 60, fontSize: 14 }}>nothing found — try another word</Text>
+            <Text style={{ color: t.muted, textAlign: "center", marginTop: 60, fontSize: 14 }}>nothing found - try another word</Text>
           )}
         </ScrollView>
       )}

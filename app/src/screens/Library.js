@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { View, Text, ScrollView, StyleSheet, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "../Icon";
 import { useStore } from "../store";
 import { SongRow, IconBtn } from "../components";
 
@@ -50,7 +50,7 @@ export function Library({ nav }) {
 
       <ScrollView style={{ flex: 1, marginTop: 16 }} contentContainerStyle={{ paddingBottom: 170 }}>
         {tab === "LIKED" && (
-          liked.length ? liked.map((s) => <SongRow key={s.id} song={s} list={liked} subtitle={s.artists?.join(", ") ?? ""} />) : <Empty t={t} note="nothing hearted yet — tap the heart on any track" />
+          liked.length ? liked.map((s) => <SongRow key={s.id} song={s} list={liked} subtitle={s.artists?.join(", ") ?? ""} />) : <Empty t={t} note="nothing hearted yet - tap the heart on any track" />
         )}
         {tab === "HISTORY" && (
           recent.length ? recent.map((s) => <SongRow key={s.id} song={s} list={recent} subtitle={s.artists?.join(", ") ?? ""} />) : <Empty t={t} note="history fills up as you listen" />
@@ -66,7 +66,7 @@ export function Library({ nav }) {
               </View>
             ))
           ) : (
-            <Empty t={t} note="no saved tracks yet — use the save button on any track" />
+            <Empty t={t} note="no saved tracks yet - use the save button on any track" />
           )
         )}
         {tab === "DOWNLOADS" && dlList.length > 0 && (

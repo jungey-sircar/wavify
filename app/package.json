@@ -2,6 +2,9 @@
   "name": "app",
   "version": "1.0.0",
   "main": "index.js",
+  "description": "Wavify music player for Windows",
+  "author": "Wavify",
+  "license": "MIT",
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -15,18 +18,71 @@
     "expo-linear-gradient": "~57.0.2",
     "expo-status-bar": "~57.0.1",
     "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-native": "0.86.3",
     "react-native-safe-area-context": "~5.7.0",
-    "react-native-svg": "15.15.4"
+    "react-native-svg": "15.15.4",
+    "react-native-web": "^0.21.2"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:web": "expo export --platform web && node desktop/fix-web-paths.js",
+    "build:backend": "node desktop/build-backend.js",
+    "desktop": "electron .",
+    "desktop:build": "npm run build:web && npm run build:backend && electron-builder"
   },
   "private": true,
   "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.0",
     "sharp": "^0.35.5"
+  },
+  "build": {
+    "appId": "com.wavify.desktop",
+    "productName": "Wavify",
+    "artifactName": "Wavify-Setup-${version}.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "desktop/**/*",
+      "dist/**/*",
+      "package.json",
+      "!node_modules/**/*"
+    ],
+    "npmRebuild": false,
+    "extraMetadata": {
+      "main": "desktop/main.cjs"
+    },
+    "extraResources": [
+      {
+        "from": "../backend/bin",
+        "to": "backend",
+        "filter": [
+          "wavify-server.exe"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Wavify"
+    }
   }
 }

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+﻿import React, { useEffect, useRef } from "react";
 import { View, Text, Animated, Easing, StyleSheet, Dimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Polyline, Circle } from "react-native-svg";
 
 const CYAN = "#4BEAF6";
 
-// one piece: W flowing into an EKG pulse — same geometry as assets/logo.svg
+// one piece: W flowing into an EKG pulse - same geometry as assets/logo.svg
 // viewBox hugs the glyph's bounding box so it can never look cropped or off-center
 function Mark({ width }) {
   const h = Math.round(width * (216 / 438));

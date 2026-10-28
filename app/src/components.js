@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, Text, Pressable, ScrollView, StyleSheet, Modal, Image, Animated } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "./Icon";
 import { useStore } from "./store";
 import { usePlayer } from "./player";
 import { coverOf, artistsOf } from "./api";

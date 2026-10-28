@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, Switch, Pressable, StyleSheet, Alert } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "../Icon";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ACCENTS } from "../theme";
 import { useStore } from "../store";

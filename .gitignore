@@ -5,6 +5,7 @@ wavify-scraper.exe
 *.apk
 *.aab
 dist/
+app/release/
 android/
 app/android/
 
