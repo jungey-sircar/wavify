@@ -67,7 +67,7 @@ export function Artist({ id, nav }) {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 16, gap: 12 }}>
             {data.albums.slice(0, 12).map((a) => (
               <Pressable key={a.id} onPress={() => nav.push("detail", { type: "album", id: a.id, title: a.name })} style={{ width: 128 }}>
-                <Cover uri={coverOf(a)} size={128} radius={12} />
+                <Cover uri={coverOf(a)} size={128} radius={6} />
                 <Text numberOfLines={1} style={{ color: t.ink, fontSize: 13, fontWeight: "700", marginTop: 8 }}>{a.name}</Text>
                 <Text numberOfLines={1} style={{ color: t.muted, fontSize: 11.5, marginTop: 1 }}>{a.year ?? ""}</Text>
               </Pressable>

@@ -6,7 +6,7 @@ import { useStore } from "../store";
 import { usePlayer } from "../player";
 import { Cover } from "../components";
 import { BASE } from "../api";
-import { shadow } from "../theme";
+import { shadow, PLAYER_THEME } from "../theme";
 
 const W = Dimensions.get("window").width;
 
@@ -145,6 +145,9 @@ export function NowPlaying({ onClose, insets }) {
     : 0;
   const scrollTo = showLyrics && lines.length ? Math.max(0, activeIdx * 40) : 0;
 
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState(false);
+
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTo({ y: scrollTo, animated: anim });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -153,43 +156,53 @@ export function NowPlaying({ onClose, insets }) {
   if (!song) return null;
 
   return (
-    <Animated.View style={[sp.fill, { backgroundColor: t.bg, transform: [{ scale }] }]}>
+    <Animated.View style={[sp.fill, { backgroundColor: PLAYER_THEME.bg, transform: [{ scale }] }]}>
       <View style={[sp.wrap, { paddingBottom: safeBottom }]}>
+        {/* Top bar — Spotify style */}
         <View style={sp.topRow}>
-          <Pressable onPress={onClose} hitSlop={12}>
-            <Ionicons name="chevron-down" size={30} color={t.ink} />
+          <Pressable onPress={onClose} hitSlop={12} style={{ padding: 4 }}>
+            <Ionicons name="chevron-down" size={28} color={PLAYER_THEME.ink} />
           </Pressable>
-          <View style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
+
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ color: PLAYER_THEME.muted, fontSize: 10.5, fontWeight: "800", letterSpacing: 1.5, textTransform: "uppercase" }}>
+              PLAYING FROM PLAYLIST
+            </Text>
+            <Text numberOfLines={1} style={{ color: PLAYER_THEME.ink, fontSize: 12, fontWeight: "700", marginTop: 2, maxWidth: 180 }}>
+              {song.album || "Wavify Mix"}
+            </Text>
+          </View>
+
+          <View style={{ flexDirection: "row", gap: 14, alignItems: "center" }}>
             <Pressable onPress={() => setSleepEnd((v) => (v ? null : Date.now() + 15 * 60 * 1000))} hitSlop={10}>
-              <Ionicons name={sleepEnd ? "time" : "time-outline"} size={24} color={sleepEnd ? t.accent : t.ink} />
+              <Ionicons name={sleepEnd ? "time" : "time-outline"} size={22} color={sleepEnd ? PLAYER_THEME.btnBg : PLAYER_THEME.ink} />
             </Pressable>
             <Pressable onPress={() => setShowLyrics((v) => !v)} hitSlop={10}>
-              <Ionicons name={showLyrics ? "document-text" : "document-text-outline"} size={24} color={showLyrics ? t.accent : t.ink} />
-            </Pressable>
-            <Pressable onPress={() => toggleLike(song)} hitSlop={10}>
-              <Ionicons name={liked ? "heart" : "heart-outline"} size={26} color={liked ? t.accent : t.ink} />
+              <Ionicons name={showLyrics ? "document-text" : "document-text-outline"} size={22} color={showLyrics ? PLAYER_THEME.btnBg : PLAYER_THEME.ink} />
             </Pressable>
           </View>
         </View>
 
         {sleepLeft !== null && (
-          <Text style={{ color: t.muted, fontSize: 11, fontWeight: "700", textAlign: "center", marginTop: 6 }}>sleep timer · {sleepLeft}m left</Text>
+          <Text style={{ color: PLAYER_THEME.muted, fontSize: 11, fontWeight: "700", textAlign: "center", marginTop: 4 }}>
+            sleep timer · {sleepLeft}m left
+          </Text>
         )}
 
         {showLyrics ? (
           <View style={{ flex: 1, marginTop: 14 }}>
             {lyrLoad ? (
-              <Text style={{ color: t.muted, textAlign: "center", marginTop: 40 }}>loading lyrics…</Text>
+              <Text style={{ color: PLAYER_THEME.muted, textAlign: "center", marginTop: 40, fontWeight: "600" }}>loading lyrics…</Text>
             ) : lines.length > 0 ? (
-              <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop: 60, paddingBottom: 90 }}>
+              <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop: 40, paddingBottom: 80 }}>
                 {lines.map((l, i) => (
                   <Pressable key={i} onPress={() => l.t < 1e8 && seek(l.t)}>
                     <Text
                       numberOfLines={2}
                       style={{
-                        color: i === activeIdx ? t.ink : t.dimInk,
+                        color: i === activeIdx ? PLAYER_THEME.ink : PLAYER_THEME.faint,
                         fontWeight: i === activeIdx ? "900" : "700",
-                        fontSize: i === activeIdx ? 24 : 20,
+                        fontSize: i === activeIdx ? 23 : 19,
                         textAlign: "center",
                         marginVertical: 6,
                         opacity: l.t > 1e8 ? 0 : 1,
@@ -203,84 +216,143 @@ export function NowPlaying({ onClose, insets }) {
             ) : lyrics?.plain ? (
               <ScrollView showsVerticalScrollIndicator={false}>
                 {lyrics.plain.split("\n").map((l, i) => (
-                  <Text key={i} style={{ color: l.trim() ? t.ink : "transparent", fontSize: 15, textAlign: "center", marginVertical: 4 }}>{l || "."}</Text>
+                  <Text key={i} style={{ color: l.trim() ? PLAYER_THEME.ink : "transparent", fontSize: 15, textAlign: "center", marginVertical: 4 }}>
+                    {l || "."}
+                  </Text>
                 ))}
               </ScrollView>
             ) : (
-              <Text style={{ color: t.muted, textAlign: "center", marginTop: 40, fontSize: 14 }}>no lyrics for this one</Text>
+              <Text style={{ color: PLAYER_THEME.muted, textAlign: "center", marginTop: 40, fontSize: 14, fontWeight: "600" }}>
+                no lyrics for this one
+              </Text>
             )}
           </View>
         ) : (
           <View style={{ alignSelf: "center", marginTop: 20 }}>
-            <View style={[shadow(), { borderRadius: 16 }]}>
-              <Cover uri={cover ?? song.cover} size={W - 64} radius={16} />
+            <View style={[shadow(), { borderRadius: 10 }]}>
+              <Cover uri={cover ?? song.cover} size={W - 56} radius={10} />
             </View>
           </View>
         )}
 
-        <View style={{ marginTop: showLyrics ? 12 : 26, paddingHorizontal: showLyrics ? 0 : 4 }}>
-          <Text numberOfLines={1} style={{ color: t.ink, fontSize: 23, fontWeight: "900", textAlign: "center" }}>{song.name}</Text>
-          <Text numberOfLines={1} style={{ color: t.muted, fontSize: 13.5, marginTop: 5, textAlign: "center" }}>{artists.join(", ")}</Text>
+        {/* Track Title, Artist & Like button — Spotify Layout (left aligned with heart on right) */}
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: showLyrics ? 12 : 24, paddingHorizontal: 4 }}>
+          <View style={{ flex: 1, marginRight: 12 }}>
+            <Text numberOfLines={1} style={{ color: PLAYER_THEME.ink, fontSize: 22, fontWeight: "800" }}>
+              {song.name}
+            </Text>
+            <Text numberOfLines={1} style={{ color: PLAYER_THEME.muted, fontSize: 14, marginTop: 4, fontWeight: "600" }}>
+              {artists.join(", ")}
+            </Text>
+          </View>
+          <Pressable onPress={() => toggleLike(song)} hitSlop={10} style={{ padding: 4 }}>
+            <Ionicons name={liked ? "heart" : "heart-outline"} size={28} color={PLAYER_THEME.ink} />
+          </Pressable>
         </View>
 
-        <View style={{ marginTop: 22 }}>
+        {/* Scrubber / Progress Bar */}
+        <View style={{ marginTop: 18 }}>
           <View
             onLayout={(e) => { barW.current = e.nativeEvent.layout.width; }}
             {...scrubPan.panHandlers}
-            style={{ paddingVertical: 12, position: "relative" }}
+            style={{ paddingVertical: 10, position: "relative" }}
           >
-            <View style={{ height: 5, borderRadius: 3, backgroundColor: t.sunk, overflow: "hidden" }}>
-              <View style={{ width: `${shown * 100}%`, height: "100%", backgroundColor: t.accent, borderRadius: 3 }} />
+            <View style={{ height: 4, borderRadius: 2, backgroundColor: PLAYER_THEME.track, overflow: "hidden" }}>
+              <View style={{ width: `${shown * 100}%`, height: "100%", backgroundColor: PLAYER_THEME.ink, borderRadius: 2 }} />
             </View>
             <View
               style={{
                 position: "absolute",
-                top: 12 + 2.5 - 6.5,
+                top: 10 + 2 - 6,
                 left: `${shown * 100}%`,
-                marginLeft: -6.5,
-                width: 13,
-                height: 13,
-                borderRadius: 7,
-                backgroundColor: "#FFFFFF",
-                borderWidth: 1,
-                borderColor: t.hair,
+                marginLeft: -6,
+                width: 12,
+                height: 12,
+                borderRadius: 6,
+                backgroundColor: PLAYER_THEME.thumb,
               }}
             />
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 8 }}>
-              <Text style={{ color: t.muted, fontSize: 11, fontWeight: "600" }}>{fmt(shown * dur)}</Text>
-              <Text style={{ color: t.muted, fontSize: 11, fontWeight: "600" }}>{fmt(dur)}</Text>
+              <Text style={{ color: PLAYER_THEME.muted, fontSize: 11, fontWeight: "600" }}>{fmt(shown * dur)}</Text>
+              <Text style={{ color: PLAYER_THEME.muted, fontSize: 11, fontWeight: "600" }}>{fmt(dur)}</Text>
             </View>
           </View>
         </View>
 
+        {/* Playback Controls — Spotify 5-control row (Shuffle, Prev, Big Play/Pause, Next, Repeat) */}
         <View style={sp.controls}>
-          <Pressable onPress={() => skip(-1)} hitSlop={12}>
-            <Ionicons name="play-skip-back" size={30} color={t.ink} />
+          <Pressable onPress={() => setShuffle((v) => !v)} hitSlop={12} style={{ padding: 6 }}>
+            <Ionicons name="shuffle" size={24} color={shuffle ? PLAYER_THEME.ink : PLAYER_THEME.faint} />
           </Pressable>
-          <Pressable onPress={toggle} style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: t.accent, alignItems: "center", justifyContent: "center" }}>
-            <Ionicons name={playing ? "pause" : "play"} size={34} color={t.onAccent} />
+
+          <Pressable onPress={() => skip(-1)} hitSlop={12} style={{ padding: 6 }}>
+            <Ionicons name="play-skip-back" size={28} color={PLAYER_THEME.ink} />
           </Pressable>
-          <Pressable onPress={() => skip(1)} hitSlop={12}>
-            <Ionicons name="play-skip-forward" size={30} color={t.ink} />
+
+          <Pressable
+            onPress={toggle}
+            style={{
+              width: 66,
+              height: 66,
+              borderRadius: 33,
+              backgroundColor: PLAYER_THEME.btnBg,
+              alignItems: "center",
+              justifyContent: "center",
+              ...shadow(10),
+            }}
+          >
+            <Ionicons name={playing ? "pause" : "play"} size={32} color={PLAYER_THEME.btnInk} />
+          </Pressable>
+
+          <Pressable onPress={() => skip(1)} hitSlop={12} style={{ padding: 6 }}>
+            <Ionicons name="play-skip-forward" size={28} color={PLAYER_THEME.ink} />
+          </Pressable>
+
+          <Pressable onPress={() => setRepeat((v) => !v)} hitSlop={12} style={{ padding: 6 }}>
+            <Ionicons name="repeat" size={24} color={repeat ? PLAYER_THEME.ink : PLAYER_THEME.faint} />
           </Pressable>
         </View>
 
         {!showLyrics && (
-          <View style={{ alignItems: "center", marginTop: 22 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 22, paddingHorizontal: 6 }}>
             <Pressable
               onPress={() => !saved && !downBusy && download(song)}
-              style={{ flexDirection: "row", alignItems: "center", gap: 8, paddingVertical: 10, paddingHorizontal: 22, borderRadius: 22, backgroundColor: t.sunk }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 6,
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderRadius: 20,
+                backgroundColor: PLAYER_THEME.cardBg,
+              }}
             >
-              <Ionicons name={saved ? "checkmark-circle" : "cloud-download-outline"} size={17} color={saved ? t.accent : t.ink} />
-              <Text style={{ color: saved ? t.accent : t.ink, fontSize: 12.5, fontWeight: "700" }}>
+              <Ionicons name={saved ? "checkmark-circle" : "cloud-download-outline"} size={16} color={PLAYER_THEME.ink} />
+              <Text style={{ color: PLAYER_THEME.ink, fontSize: 12, fontWeight: "700" }}>
                 {saved
-                  ? "Saved for offline"
+                  ? "Saved offline"
                   : downBusy
                   ? progress[song.id] > 0
                     ? `Saving ${Math.round(progress[song.id] * 100)}%`
                     : "Saving…"
-                  : "Save for offline"}
+                  : "Save offline"}
               </Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => setShowLyrics(true)}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 6,
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderRadius: 20,
+                backgroundColor: PLAYER_THEME.cardBg,
+              }}
+            >
+              <Ionicons name="mic-outline" size={16} color={PLAYER_THEME.ink} />
+              <Text style={{ color: PLAYER_THEME.ink, fontSize: 12, fontWeight: "700" }}>Lyrics</Text>
             </Pressable>
           </View>
         )}
@@ -289,10 +361,9 @@ export function NowPlaying({ onClose, insets }) {
   );
 }
 
-
 const sp = StyleSheet.create({
   fill: { flex: 1 },
-  wrap: { flex: 1, padding: 20, paddingTop: 12 },
+  wrap: { flex: 1, padding: 20, paddingTop: 10 },
   topRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
-  controls: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 34, marginTop: 8 },
+  controls: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 12, marginTop: 10 },
 });

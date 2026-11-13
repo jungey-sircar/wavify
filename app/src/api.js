@@ -3,7 +3,10 @@ import { BASE } from "./config";
 export { BASE };
 
 async function j(path) {
-  const r = await fetch(BASE + path);
+  const r = await fetch(BASE + path, {
+    cache: "no-store",
+    headers: { "Cache-Control": "no-cache" },
+  });
   if (!r.ok) throw new Error("HTTP " + r.status);
   return r.json();
 }

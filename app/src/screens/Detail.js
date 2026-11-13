@@ -45,13 +45,13 @@ export function Detail({ type, id }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: t.bg }} contentContainerStyle={{ paddingBottom: 170 }}>
       <View style={{ alignItems: "center", paddingTop: 16, paddingHorizontal: 20 }}>
-        <Cover uri={coverOf(data)} size={200} radius={16} />
-        <Text style={{ color: t.muted, fontSize: 11, fontWeight: "700", letterSpacing: 2, marginTop: 16 }}>{type === "album" ? "ALBUM" : "PLAYLIST"}</Text>
+        <Cover uri={coverOf(data)} size={200} radius={6} />
+        <Text style={{ color: t.muted, fontSize: 11, fontWeight: "800", letterSpacing: 2, marginTop: 16 }}>{type === "album" ? "ALBUM" : "PLAYLIST"}</Text>
         <Text style={{ color: t.ink, fontSize: 24, fontWeight: "900", marginTop: 4, textAlign: "center" }}>{data?.name}</Text>
         <Text numberOfLines={1} style={{ color: t.muted, fontSize: 13, marginTop: 6, textAlign: "center" }}>{names || "Mix"}</Text>
       </View>
 
-      <View style={{ paddingHorizontal: 20, marginTop: 18 }}>
+      <View style={{ paddingHorizontal: 20, marginTop: 18, flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
         <Fab icon="play" onPress={() => list[0] && play(list[0], list)} />
       </View>
 

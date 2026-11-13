@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useEffect, useState, useCallback, useRef } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback, useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as FileSystem from "expo-file-system/legacy";
 import { makeTheme } from "./theme";
@@ -24,7 +24,7 @@ const load = async (key, fallback) => {
 
 export function StoreProvider({ children }) {
   const [mode, setMode] = useState("dark");
-  const [accentId, setAccentId] = useState("red");
+  const [accentId, setAccentId] = useState("spotify");
   const [quality, setQualitySt] = useState(3);
   const [anim, setAnimSt] = useState(true);
   const [searches, setSearches] = useState([]);
@@ -50,7 +50,8 @@ export function StoreProvider({ children }) {
         load("wave.searches", []),
       ]);
       if (m === "dark" || m === "light") setMode(m);
-      if (a) setAccentId(a);
+      if (a && a !== "red") setAccentId(a);
+      else setAccentId("spotify");
       if (q >= 0 && q <= 4) setQualitySt(q);
       if (av === false) setAnimSt(false);
       setSearches(sh);

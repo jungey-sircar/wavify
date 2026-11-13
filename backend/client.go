@@ -26,9 +26,9 @@ var backends = []string{
 const lrclibBase = "https://lrclib.net"
 
 var client = &http.Client{
-	Timeout:   15 * time.Second,
+	Timeout: 15 * time.Second,
 	Transport: &http.Transport{
-		DialContext: (&net.Dialer{Timeout: 5 * time.Second}).DialContext,
+		DialContext:         (&net.Dialer{Timeout: 5 * time.Second}).DialContext,
 		MaxIdleConns:        100,
 		MaxIdleConnsPerHost: 100,
 		IdleConnTimeout:     90 * time.Second,
@@ -62,6 +62,8 @@ func getJSONDirect(ctx context.Context, endpoint string, out any) error {
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 	req.Header.Set("Accept", "application/json, text/plain, */*")
 	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
+	req.Header.Set("Cache-Control", "no-cache")
+	req.Header.Set("Pragma", "no-cache")
 	resp, err := client.Do(req)
 	if err != nil {
 		return err

@@ -3,7 +3,7 @@ import { View, Text, Pressable, StyleSheet, BackHandler, Alert } from "react-nat
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "./src/Icon";
-import { shadow } from "./src/theme";
+import { shadow, PLAYER_THEME } from "./src/theme";
 import { StoreProvider, useStore } from "./src/store";
 import { PlayerProvider, usePlayer } from "./src/player";
 import { Home } from "./src/screens/Home";
@@ -19,7 +19,7 @@ import { Cover } from "./src/components";
 const TABS = [
   { key: "home", off: "home-outline", on: "home" },
   { key: "search", off: "search-outline", on: "search" },
-  { key: "library", off: "albums-outline", on: "albums" },
+  { key: "library", off: "library-outline", on: "library" },
 ];
 
 // on-device crash reporter: surfaces the real error on screen (no adb needed)
@@ -35,16 +35,15 @@ if (global.ErrorUtils?.setGlobalHandler) {
 }
 
 function Shell() {
-  const { t } = useStore();
+  const { t, isLiked, toggleLike } = useStore();
   const insets = useSafeAreaInsets();
-  const { mini, cover, playing, toggle } = usePlayer();
+  const { mini, cover, playing, toggle, position, duration, skip } = usePlayer();
   const [nav, setNav] = useState({ tab: "home", stack: [] });
   const [full, setFull] = useState(false);
   const [splash, setSplash] = useState(true);
   const [exitOpen, setExitOpen] = useState(false);
-  // known-good translucent glass — the real BlurView path froze/crashed on the test device
-  const glass = t.mode === "dark" ? "rgba(18,18,18,0.94)" : "rgba(250,250,250,0.95)";
-  const scrim = t.mode === "dark" ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.3)";
+  const glass = t.mode === "dark" ? "rgba(18,18,18,0.96)" : "rgba(250,250,250,0.96)";
+  const scrim = t.mode === "dark" ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.3)";
 
   const push = (screen, params) => setNav((n) => ({ ...n, stack: [...n.stack, { screen, params }] }));
   const pop = () => setNav((n) => ({ ...n, stack: n.stack.slice(0, -1) }));
@@ -87,6 +86,9 @@ function Shell() {
   else if (nav.tab === "library") body = <Library nav={navApi} />;
   else body = <Home nav={navApi} goToCollection={(q, title) => push("collection", { q, title })} />;
 
+  const dur = duration || mini?.duration || 0;
+  const progressRatio = dur > 0 ? Math.min(1, Math.max(0, position / dur)) : 0;
+
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <StatusBar style={t.mode === "dark" ? "light" : "dark"} />
@@ -104,28 +106,67 @@ function Shell() {
         <View style={{ flex: 1 }}>{body}</View>
       </View>
 
+      {/* When a song is chosen, the player is rendered in opaque light blue */}
       {mini && !full && (
-        <Pressable onPress={() => setFull(true)} style={[st.miniOuter, { bottom: 72 + insets.bottom }]}>
+        <Pressable onPress={() => setFull(true)} style={[st.miniOuter, { bottom: 62 + insets.bottom }]}>
           <View
             style={[
               st.mini,
-              { backgroundColor: glass, borderRadius: 14, overflow: "hidden", borderWidth: 1, borderColor: t.hair, ...shadow(12) },
+              {
+                backgroundColor: PLAYER_THEME.bg,
+                borderRadius: 8,
+                overflow: "hidden",
+                borderWidth: 1,
+                borderColor: PLAYER_THEME.hair,
+                ...shadow(14),
+              },
             ]}
           >
-            <Cover uri={cover} size={46} radius={8} />
-            <View style={{ flex: 1, marginLeft: 10, marginRight: 6 }}>
-              <Text numberOfLines={1} style={{ color: t.ink, fontWeight: "700", fontSize: 13.5 }}>{mini.name}</Text>
-              <Text numberOfLines={1} style={{ color: t.muted, fontSize: 11 }}>{mini.artists?.[0] ?? ""}</Text>
+            <Cover uri={cover} size={42} radius={6} />
+            <View style={{ flex: 1, marginLeft: 10, marginRight: 6, justifyContent: "center" }}>
+              <Text numberOfLines={1} style={{ color: PLAYER_THEME.ink, fontWeight: "700", fontSize: 13.5 }}>
+                {mini.name}
+              </Text>
+              <Text numberOfLines={1} style={{ color: PLAYER_THEME.muted, fontSize: 11.5, fontWeight: "600", marginTop: 2 }}>
+                {mini.artists?.[0] ?? ""}
+              </Text>
             </View>
-            <Pressable onPress={toggle} hitSlop={8} style={[st.miniPlay, { backgroundColor: t.accent }]}>
-              <Ionicons name={playing ? "pause" : "play"} size={17} color={t.onAccent} />
+
+            <Pressable onPress={() => toggleLike(mini)} hitSlop={10} style={{ padding: 6, marginRight: 2 }}>
+              <Ionicons
+                name={isLiked(mini.id) ? "heart" : "heart-outline"}
+                size={21}
+                color={isLiked(mini.id) ? PLAYER_THEME.ink : PLAYER_THEME.muted}
+              />
             </Pressable>
+
+            <Pressable onPress={toggle} hitSlop={8} style={[st.miniPlay, { backgroundColor: PLAYER_THEME.btnBg }]}>
+              <Ionicons name={playing ? "pause" : "play"} size={16} color={PLAYER_THEME.btnInk} />
+            </Pressable>
+
+            <Pressable onPress={() => skip(1)} hitSlop={8} style={{ padding: 6, marginLeft: 2 }}>
+              <Ionicons name="play-skip-forward" size={19} color={PLAYER_THEME.ink} />
+            </Pressable>
+
+            {/* Live progress line at bottom of player */}
+            <View style={st.miniProgressTrack}>
+              <View style={[st.miniProgressBar, { width: `${progressRatio * 100}%` }]} />
+            </View>
           </View>
         </Pressable>
       )}
 
+      {/* Bottom tabs — Spotify style */}
       <View
-        style={[st.tabs, { backgroundColor: glass, paddingBottom: insets.bottom + 6, borderTopWidth: 1, borderTopColor: t.hair }]}
+        style={[
+          st.tabs,
+          {
+            backgroundColor: t.mode === "dark" ? "#121212" : "#FFFFFF",
+            paddingBottom: insets.bottom + 8,
+            borderTopWidth: 1,
+            borderTopColor: t.hair,
+          },
+        ]}
         pointerEvents="box-none"
       >
         {TABS.map((x) => {
@@ -133,8 +174,15 @@ function Shell() {
           return (
             <Pressable key={x.key} onPress={() => goto(x.key)} style={st.tabHit}>
               <Ionicons name={active ? x.on : x.off} size={24} color={active ? t.ink : t.muted} />
-              <Text style={{ fontSize: 10.5, marginTop: 3, fontWeight: "600", color: active ? t.ink : t.muted }}>
-                {x.key === "home" ? "Home" : x.key === "search" ? "Search" : "Library"}
+              <Text
+                style={{
+                  fontSize: 10.5,
+                  marginTop: 3,
+                  fontWeight: active ? "700" : "500",
+                  color: active ? t.ink : t.muted,
+                }}
+              >
+                {x.key === "home" ? "Home" : x.key === "search" ? "Search" : "Your Library"}
               </Text>
             </Pressable>
           );
@@ -165,7 +213,19 @@ function Shell() {
       )}
 
       {full && (
-        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, elevation: 100, backgroundColor: t.bg, paddingTop: insets.top + 4 }}>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 100,
+            elevation: 100,
+            backgroundColor: PLAYER_THEME.bg,
+            paddingTop: insets.top + 4,
+          }}
+        >
           <NowPlaying onClose={() => setFull(false)} insets={insets} />
         </View>
       )}
@@ -178,10 +238,35 @@ function Shell() {
 const st = StyleSheet.create({
   backRow: { flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingVertical: 10 },
   miniOuter: { position: "absolute", left: 8, right: 8 },
-  mini: { flexDirection: "row", alignItems: "center", paddingVertical: 6, paddingRight: 8, paddingLeft: 6 },
-  miniPlay: { width: 34, height: 34, borderRadius: 17, alignItems: "center", justifyContent: "center", marginLeft: 4 },
-  tabs: { flexDirection: "row", paddingTop: 10 },
-  tabHit: { flex: 1, alignItems: "center" },
+  mini: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 7,
+    paddingHorizontal: 8,
+    position: "relative",
+  },
+  miniPlay: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 3,
+  },
+  miniProgressTrack: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 2.5,
+    backgroundColor: PLAYER_THEME.track,
+  },
+  miniProgressBar: {
+    height: "100%",
+    backgroundColor: PLAYER_THEME.ink,
+  },
+  tabs: { flexDirection: "row", paddingTop: 8, height: 60 },
+  tabHit: { flex: 1, alignItems: "center", justifyContent: "center" },
   exitBtn: { flex: 1, height: 46, borderRadius: 14, alignItems: "center", justifyContent: "center" },
 });
 

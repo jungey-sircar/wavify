@@ -6,7 +6,7 @@ import { usePlayer } from "./player";
 import { coverOf, artistsOf } from "./api";
 import { ACCENTS } from "./theme";
 
-export function Cover({ uri, size, radius = 10 }) {
+export function Cover({ uri, size, radius = 6 }) {
   const { t } = useStore();
   return (
     <View style={{ width: size, height: size, borderRadius: radius, overflow: "hidden", backgroundColor: t.sunk }}>
@@ -80,22 +80,44 @@ export function SkeletonHero() {
 
 export function SongRow({ song, list, subtitle, num }) {
   const { t, isLiked, toggleLike } = useStore();
-  const { play } = usePlayer();
+  const { play, mini, playing } = usePlayer();
   const liked = isLiked(song.id);
+  const isCurrent = mini?.id === song.id;
+
   return (
-    <View style={st.row}>
-      {num ? <Text style={{ color: t.faint, fontSize: 13, fontWeight: "700", width: 22, textAlign: "center" }}>{num}</Text> : null}
+    <View style={[st.row, isCurrent && { backgroundColor: t.mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", borderRadius: 6 }]}>
+      {num ? (
+        <View style={{ width: 26, alignItems: "center", justifyContent: "center" }}>
+          {isCurrent ? (
+            <Ionicons name="volume-high" size={15} color={t.accent} />
+          ) : (
+            <Text style={{ color: t.faint, fontSize: 13, fontWeight: "700" }}>{num}</Text>
+          )}
+        </View>
+      ) : null}
       <Pressable onPress={() => play(song, list ?? [song])} style={st.rowMain} hitSlop={4}>
-        <Cover uri={coverOf(song) ?? song.cover} size={50} radius={8} />
+        <Cover uri={coverOf(song) ?? song.cover} size={48} radius={4} />
         <View style={{ flex: 1, marginLeft: 12 }}>
-          <Text numberOfLines={1} style={{ color: t.ink, fontSize: 15, fontWeight: "600" }}>{song.name}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text
+              numberOfLines={1}
+              style={{
+                color: isCurrent ? t.accent : t.ink,
+                fontSize: 14.5,
+                fontWeight: isCurrent ? "700" : "600",
+                flex: 1,
+              }}
+            >
+              {song.name}
+            </Text>
+          </View>
           <Text numberOfLines={1} style={{ color: t.muted, fontSize: 12, marginTop: 3 }}>
             {subtitle ?? artistsOf(song).join(", ")}
           </Text>
         </View>
       </Pressable>
       <Pressable onPress={() => toggleLike(song)} hitSlop={10} style={st.rowSide}>
-        <Ionicons name={liked ? "heart" : "heart-outline"} size={20} color={liked ? t.accent : t.muted} />
+        <Ionicons name={liked ? "heart" : "heart-outline"} size={20} color={liked ? t.accent : t.faint} />
       </Pressable>
     </View>
   );
@@ -106,10 +128,10 @@ export function Shelf({ title, onSeeAll, children }) {
   return (
     <View style={{ marginTop: 24 }}>
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 16, marginBottom: 12 }}>
-        <Text style={{ color: t.ink, fontSize: 20, fontWeight: "800" }}>{title}</Text>
+        <Text style={{ color: t.ink, fontSize: 21, fontWeight: "800" }}>{title}</Text>
         {onSeeAll ? (
           <Pressable onPress={onSeeAll} hitSlop={10}>
-            <Text style={{ color: t.muted, fontSize: 12.5, fontWeight: "700" }}>More</Text>
+            <Text style={{ color: t.muted, fontSize: 12, fontWeight: "700" }}>Show all</Text>
           </Pressable>
         ) : null}
       </View>
@@ -127,31 +149,45 @@ export function IconBtn({ name, onPress, size = 22, color, style }) {
   );
 }
 
-export function Fab({ icon = "play", onPress, size = 62 }) {
+export function Fab({ icon = "play", onPress, size = 56 }) {
   const { t } = useStore();
   return (
     <Pressable
       onPress={onPress}
-      style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: t.accent, alignItems: "center", justifyContent: "center" }}
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: t.accent,
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 8,
+        shadowColor: "#000",
+        shadowOpacity: 0.35,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+      }}
     >
-      <Ionicons name={icon} size={Math.round(size * 0.42)} color={t.onAccent} />
+      <Ionicons name={icon} size={Math.round(size * 0.44)} color={t.onAccent} />
     </Pressable>
   );
 }
 
 export function Chip({ children, active, onPress }) {
   const { t } = useStore();
+  const bg = active ? t.ink : (t.mode === "dark" ? "#242424" : "#EFEFEF");
+  const color = active ? (t.mode === "dark" ? "#121212" : "#FFFFFF") : t.ink;
   return (
     <Pressable
       onPress={onPress}
       style={{
         paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingVertical: 7,
         borderRadius: 20,
-        backgroundColor: active ? t.accent : t.glass,
+        backgroundColor: bg,
       }}
     >
-      <Text style={{ color: active ? t.onAccent : t.ink, fontSize: 13, fontWeight: "600" }}>{children}</Text>
+      <Text style={{ color, fontSize: 13, fontWeight: "700" }}>{children}</Text>
     </Pressable>
   );
 }
